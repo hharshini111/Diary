@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Shrimp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <header>
+        <a href="#" class="logo">Harshini</a>
+        <nav>
+            <a href="#" class="active">Home</a>
+            <a href="Who's this.html">Who's this?</a>
+            <a href="Hobbies.html">Hobbies</a>
+            <a href="Studies.html">Studies</a>
+            <a href="Experience.html">Experience</a>
+            <a href="Vlog.html">Vlog</a>
+            <button class="button-login" role="button"><span class="text"></span></button>
+        </nav>
+    </header>
+
+    <section class="home">
+        <div class="home-img">
+            <img src="harsh.jpg" alt="Portrait of Harshini">
+        </div>
+        <div class="home-content">
+            <h1>Hey there! It's <span>Harshini</span></h1>
+            <h3 class="typing-text">I'm a <span id="typed-text"></span><span class="cursor">|</span></h3>
+            <p>Have fun learning about me :) </p>
+            <div class="social-icons">
+            </div>
+        </div>
+    </section>
+    <script>
+    const phrases = [
+        "Software Developer",
+        "Coding Educator",
+        "STEM Lover",
+        "Artist",
+        "Robotics Enthusiast",
+        "Web Designer",
+        "Hack Club President",
+        
+    ];
+
+    const typedText = document.getElementById("typed-text");
+    const cursor = document.querySelector(".cursor");
+
+    let phraseIndex = 0;
+    let letterIndex = 0;
+    let typing = true;
+
+    function typeLoop() {
+        const currentPhrase = phrases[phraseIndex];
+
+        if (typing) {
+            if (letterIndex < currentPhrase.length) {
+                typedText.textContent += currentPhrase.charAt(letterIndex);
+                letterIndex++;
+                setTimeout(typeLoop, 100);
+            } else {
+                typing = false;
+                setTimeout(typeLoop, 1200);
+            }
+        } else {
+            if (letterIndex > 0) {
+                typedText.textContent = currentPhrase.substring(0, letterIndex - 1);
+                letterIndex--;
+                setTimeout(typeLoop, 60);
+            } else {
+                typing = true;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(typeLoop, 200);
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        typeLoop();
+    });
+    </script>
+</body>
+
+</html>
