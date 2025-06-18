@@ -1,12 +1,12 @@
-const saveBtn = document.getElementById("saveBtn");
+const saveBtn = document.getElementById("saveBtn"); 
 const entryBox = document.getElementById("entry");
 const entryDate = document.getElementById("entryDate");
 const entriesContainer = document.getElementById("entries");
 const stickers = document.querySelectorAll(".sticker");
+const saveGif = document.getElementById("saveGif"); 
 
 let selectedSticker = "";
 
-// Handle top sticker selection
 stickers.forEach(btn => {
     btn.addEventListener("click", () => {
         selectedSticker = btn.dataset.emoji;
@@ -15,7 +15,6 @@ stickers.forEach(btn => {
     });
 });
 
-// Load saved entries
 window.onload = function () {
     const saved = JSON.parse(localStorage.getItem("diaryEntries")) || [];
     saved.forEach(data => addEntryToPage(data.text, data.sticker, data.date));
@@ -32,6 +31,12 @@ saveBtn.onclick = function () {
         entryDate.value = "";
         selectedSticker = "";
         stickers.forEach(b => b.style.opacity = "1");
+
+        // Show the GIF for 2 seconds
+        saveGif.style.display = "block";
+        setTimeout(() => {
+            saveGif.style.display = "none";
+        }, 2000);
     }
 };
 
@@ -57,7 +62,6 @@ function addEntryToPage(text, sticker = "", date = "") {
         deleteFromLocalStorage(text);
     };
 
-    // Mood selector inside entry
     const moodBtns = div.querySelectorAll(".mood-select button");
     moodBtns.forEach(btn => {
         btn.addEventListener("click", () => {

@@ -210,5 +210,9 @@ button:hover {
     max-width: 600px;
     text-align: right;
 }
-
+#saveGif {
+  position: fixed;  
+  top: 10px; 
+  left:-2px 
+}
 
