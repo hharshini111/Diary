@@ -9,18 +9,20 @@ let selectedSticker = "";
 
 stickers.forEach(btn => {
     btn.addEventListener("click", () => {
+
         selectedSticker = btn.dataset.emoji;
         stickers.forEach(b => b.style.opacity = "0.5");
+
         btn.style.opacity = "1";
     });
 });
 
 window.onload = function () {
     const saved = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+
     saved.forEach(data => addEntryToPage(data.text, data.sticker, data.date));
 };
 
-// Save new entry
 saveBtn.onclick = function () {
     const text = entryBox.value.trim();
     const date = entryDate.value.trim();
@@ -31,8 +33,7 @@ saveBtn.onclick = function () {
         entryDate.value = "";
         selectedSticker = "";
         stickers.forEach(b => b.style.opacity = "1");
-
-        // Show the GIF for 2 seconds
+        //gif stuff
         saveGif.style.display = "block";
         setTimeout(() => {
             saveGif.style.display = "none";
@@ -45,6 +46,7 @@ function addEntryToPage(text, sticker = "", date = "") {
     div.className = "entry";
 
     div.innerHTML = `
+
         <button class="delete-btn">✕</button>
         <div class="date">${date || "no date"}</div>
         <div>${text}</div>
@@ -54,9 +56,10 @@ function addEntryToPage(text, sticker = "", date = "") {
             <button data-emoji="💖" class="${sticker === '💖' ? 'active' : ''}">💖</button>
             <button data-emoji="😡" class="${sticker === '😡' ? 'active' : ''}">😡</button>
         </div>
-    `;
+    `
+    ;
 
-    // Delete entry
+    // Delete
     div.querySelector(".delete-btn").onclick = () => {
         div.remove();
         deleteFromLocalStorage(text);
@@ -66,6 +69,7 @@ function addEntryToPage(text, sticker = "", date = "") {
     moodBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             const newMood = btn.dataset.emoji;
+
             moodBtns.forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
             updateStickerInLocalStorage(text, newMood);
@@ -78,16 +82,19 @@ function addEntryToPage(text, sticker = "", date = "") {
 function saveToLocalStorage(text, sticker, date) {
     const saved = JSON.parse(localStorage.getItem("diaryEntries")) || [];
     saved.push({ text, sticker, date });
+
     localStorage.setItem("diaryEntries", JSON.stringify(saved));
 }
 
 function deleteFromLocalStorage(text) {
+    
     let saved = JSON.parse(localStorage.getItem("diaryEntries")) || [];
     saved = saved.filter(entry => entry.text !== text);
     localStorage.setItem("diaryEntries", JSON.stringify(saved));
 }
 
 function updateStickerInLocalStorage(text, newSticker) {
+
     let saved = JSON.parse(localStorage.getItem("diaryEntries")) || [];
     saved = saved.map(entry => {
         if (entry.text === text) entry.sticker = newSticker;

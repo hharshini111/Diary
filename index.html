@@ -5,10 +5,12 @@
     <title>Just my lil' diary</title>
     <link rel="stylesheet" href="game.css">
 </head>
+
+
 <body>
     <img id="saveGif" src="yay.gif" style="display:none; max-width: 400px; height: auto;"/>
 
-    <div class="diary-container2">•┈┈••✦•┈┈••✦ ❤ ✦••┈┈•
+    <div class="diary-container2">•┈┈••✦ ❤ ✦••┈•
         If you don't know where to start:<br>
         How did today make you feel?<br>
         Significant moments?<br>
@@ -23,8 +25,6 @@
         <input id="entryDate" type="text" placeholder="enter date...or don't, (you do you)">
         <div id="entries"></div>
 
-        <!-- Add this directly below -->
-        <div id="ai-reply" class="ai-reply"></div>
 
         <div id="stickers">
             <button class="sticker" data-emoji="😄">😄</button>
@@ -38,8 +38,7 @@
 
         <div id="entries"></div>
 
-        <!-- 🌸 AI Reply Box -->
-        <div id="ai-reply" class="ai-reply"></div>
+       
     </div>
 
     <div class="diary-container3">
@@ -47,5 +46,14 @@
     </div>
 
     <script src="game.js"></script>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="ChatBot(only for sharing feelings)"
+  agent-id="be85e27c-3ee0-4c90-995b-d2b91fac7d46"
+  language-code="en"
+></df-messenger>
+      
 </body>
+
 </html>
