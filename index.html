@@ -23,7 +23,7 @@
 
         <textarea id="entry" placeholder="type your thoughts here..."></textarea>
         <input id="entryDate" type="text" placeholder="enter date...or don't, (you do you)">
-        <div id="entries"></div>
+        
 
 
         <div id="stickers">
@@ -33,8 +33,9 @@
             <button class="sticker" data-emoji="😔">😔</button>
             <button class="sticker" data-emoji="😡">😡</button>
         </div>
-
-        <button id="saveBtn">save</button>
+         <button id="saveBtn">save</button>
+        <div id="entries"></div>
+       
 
         <div id="entries"></div>
 
@@ -42,18 +43,14 @@
     </div>
 
     <div class="diary-container3">
-        •┈••✦ ❤ ✦••┈• Always remember: You're funny, pretty and amazing every day, all the time :) •┈••✦ ❤ ✦••┈•
+        •┈••✦ ❤ ✦••┈• Always remember: You are what you define you to be :) (make use of the AI chatbot below!) •┈••✦ ❤ ✦••┈•
     </div>
 
     <script src="game.js"></script>
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-  intent="WELCOME"
-  chat-title="ChatBot(only for sharing feelings)"
-  agent-id="be85e27c-3ee0-4c90-995b-d2b91fac7d46"
-  language-code="en"
-></df-messenger>
-      
+ 
+       <script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="YVXFrJ1IHHYdqx6R7jXDi";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
 </body>
 
 </html>

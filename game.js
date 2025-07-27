@@ -45,39 +45,40 @@ function addEntryToPage(text, sticker = "", date = "") {
     const div = document.createElement("div");
     div.className = "entry";
 
-    div.innerHTML = `
-
-        <button class="delete-btn">✕</button>
-        <div class="date">${date || "no date"}</div>
-        <div>${text}</div>
-        <div class="mood-select">
-            <button data-emoji="😊" class="${sticker === '😊' ? 'active' : ''}">😊</button>
-            <button data-emoji="😢" class="${sticker === '😢' ? 'active' : ''}">😢</button>
-            <button data-emoji="💖" class="${sticker === '💖' ? 'active' : ''}">💖</button>
-            <button data-emoji="😡" class="${sticker === '😡' ? 'active' : ''}">😡</button>
-        </div>
-    `
-    ;
-
-    // Delete
-    div.querySelector(".delete-btn").onclick = () => {
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "delete-btn";
+    deleteBtn.textContent = "✕";
+    deleteBtn.onclick = () => {
         div.remove();
         deleteFromLocalStorage(text);
     };
 
-    const moodBtns = div.querySelectorAll(".mood-select button");
-    moodBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const newMood = btn.dataset.emoji;
+    const dateDiv = document.createElement("div");
+    dateDiv.className = "date";
+    dateDiv.textContent = date || "no date";
 
-            moodBtns.forEach(b => b.classList.remove("active"));
+    const textDiv = document.createElement("div");
+    textDiv.textContent = text;
+
+    const moodDiv = document.createElement("div");
+    moodDiv.className = "mood-select";
+    ["😊", "😢", "💖", "😡"].forEach(emoji => {
+        const btn = document.createElement("button");
+        btn.dataset.emoji = emoji;
+        btn.textContent = emoji;
+        if (sticker === emoji) btn.classList.add("active");
+        btn.onclick = () => {
+            moodDiv.querySelectorAll("button").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
-            updateStickerInLocalStorage(text, newMood);
-        });
+            updateStickerInLocalStorage(text, emoji);
+        };
+        moodDiv.appendChild(btn);
     });
 
+    div.append(deleteBtn, dateDiv, textDiv, moodDiv);
     entriesContainer.prepend(div);
 }
+
 
 function saveToLocalStorage(text, sticker, date) {
     const saved = JSON.parse(localStorage.getItem("diaryEntries")) || [];
